@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: hiworker
+Version: 0.0.1
+Summary: A hiworks chatbot API
+Home-page: https://github.com/JoHwanhee/hiwoker
+Author: Jayden
+Author-email: chohh@gabia.com
+License: UNKNOWN
+Description: # hiwoker
+        hiwoker
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown

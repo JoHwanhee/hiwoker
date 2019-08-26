@@ -1,0 +1,8 @@
+README.md
+setup.py
+hiworker.egg-info/PKG-INFO
+hiworker.egg-info/SOURCES.txt
+hiworker.egg-info/dependency_links.txt
+hiworker.egg-info/top_level.txt
+sample/__init__.py
+sample/greeting.py
