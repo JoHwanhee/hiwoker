@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
  
 setuptools.setup(
     name="hiworker",
-    version="0.0.1",
+    version="0.0.2",
     author="Jayden",
     author_email="chohh@gabia.com",
     description="A hiworks chatbot API",
