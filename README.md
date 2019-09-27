@@ -8,8 +8,7 @@ pip install hiworker
 
 ## Usage
 
-0. API Key 발급
-
+0. API Key 발급 [하이웍스 메신져](https://www.hiworks.com/cs/download)에서 APIKey를 받을 받을 수 있습니다.
 <img src="./cb.png" width="300">
 
 
