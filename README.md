@@ -17,7 +17,7 @@ pip install hiworker
 server = hiworksBotServer('a4d83710-5905-465a-ae32-26d7eac9035c')
 ```
 
-#### Guide 생성
+#### Guide 생성 - 컨텐트만 받는 경우
 ```python
 def makeBugGuide():
     guide = GuideToken('bug', '/버그')
@@ -25,6 +25,22 @@ def makeBugGuide():
     commandToken.contentOnly = True
 
     guide.userCommandTokens = [commandToken]
+    return guide
+```
+
+#### Guide 생성 - 변수와 함께 받는 경우
+```python
+def makeBookGuide():
+    guide = GuideToken('book', '/예약')
+    commandToken = UserCommandToken('room', "%회의실명%")
+    commandToken.allValues = ['S1','S2','S3','S4','S5','M','대 회의실']
+    commandToken.canValues = ['S1','S2','S3']
+
+    commandToken2 = UserCommandToken('time', "%예약할 시간%")
+    commandToken2.allValues = ["09:00~09:30", "10:00~10:30","10:30~11:00"]
+    commandToken2.canValues = ["09:00~09:30"]
+
+    guide.userCommandTokens = [commandToken, commandToken2]
     return guide
 ```
 
