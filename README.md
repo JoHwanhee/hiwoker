@@ -10,6 +10,9 @@ pip install hiworker
 
 0. API Key 발급
 
+<img src="./cb.png" width="300">
+
+
 1. Guide 생성
 ```python
 def makeBugGuide():
