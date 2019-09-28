@@ -9,7 +9,7 @@ class ApiKeyChecker:
         self.key = key
 
     def check(self):
-        URL = 'http://127.0.0.1:5000/keys/' + self.key
+        URL = 'http://10.41.50.206:5002/keys/' + self.key
         response = requests.get(URL) 
         if response.status_code != 200:
             print(response.text)
@@ -29,7 +29,7 @@ class hiworksBotServer(metaclass=ABCMeta):
     def addHandler(self, name, handler):
         self.wrapper.add_endpoint(endpoint='/%s' % name, endpoint_name=name, handler=handler, methods=['POST'])
 
-    def run(self, host = '127.0.0.1', port = 5001):
+    def run(self, host = '0.0.0.0', port = 5001):
         self.wrapper.add_endpoint(endpoint='/', endpoint_name='init', handler=self.init, methods=['GET'])
         self.wrapper.add_endpoint(endpoint='/prev', endpoint_name='prev', handler=self.prev, methods=['POST'])
         self.wrapper.run(host, port)

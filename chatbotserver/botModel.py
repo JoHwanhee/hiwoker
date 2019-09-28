@@ -11,8 +11,8 @@ model = { "email":"",
           "botIp":"",
           "isLogon": False }
 
-defaultModel = { "email": "jhh0220@jhh0220.onhiworks.com",
-                 "domain" : "jhh0220.onhiworks.com",
+defaultModel = { "email": "chohh@gabia.com",
+                 "domain" : "gabia.com",
                  "apiKey": createUUID(),
                  "botIp": socket.gethostbyname(socket.getfqdn()),
                  "isLogon": True }
