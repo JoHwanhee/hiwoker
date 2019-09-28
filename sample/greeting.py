@@ -90,7 +90,7 @@ def run():
     guides.append(guide)
     guides.append(guide2)
 
-    server = hiworksBotServer('')
+    server = hiworksBotServer('892e20a3-1d16-40b0-a5d2-7d55b8785944')
     server.setGuides(guides)
 
     server.addHandler('book', book)

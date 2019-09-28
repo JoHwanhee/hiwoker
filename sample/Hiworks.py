@@ -1,6 +1,19 @@
 from abc import *
 from flask import Flask, Response, request, url_for, redirect
 import json
+import requests 
+import sys
+
+class ApiKeyChecker:
+    def __init__(self, key):
+        self.key = key
+
+    def check(self):
+        URL = 'http://127.0.0.1:5000/keys/' + self.key
+        response = requests.get(URL) 
+        if response.status_code != 200:
+            print(response.text)
+            sys.exit()
 
 class hiworksBotServer(metaclass=ABCMeta):
     def __init__(self, key):
@@ -8,6 +21,7 @@ class hiworksBotServer(metaclass=ABCMeta):
         self.wrapper = None
         self.key = key
         self.wrapper = FlaskAppWrapper('wrap')
+        ApiKeyChecker(key).check()
 
     def setGuides(self, guides):
         self.guides = guides
@@ -15,7 +29,7 @@ class hiworksBotServer(metaclass=ABCMeta):
     def addHandler(self, name, handler):
         self.wrapper.add_endpoint(endpoint='/%s' % name, endpoint_name=name, handler=handler, methods=['POST'])
 
-    def run(self, host = '127.0.0.1', port = 5000):
+    def run(self, host = '127.0.0.1', port = 5001):
         self.wrapper.add_endpoint(endpoint='/', endpoint_name='init', handler=self.init, methods=['GET'])
         self.wrapper.add_endpoint(endpoint='/prev', endpoint_name='prev', handler=self.prev, methods=['POST'])
         self.wrapper.run(host, port)

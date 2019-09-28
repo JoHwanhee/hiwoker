@@ -2,13 +2,47 @@ from pymongo import MongoClient
 from bson import ObjectId
 import uuid
 from botModel import model, defaultModel
-from flask import Flask
+from flask import Flask, request
+import requests 
+
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def hello():
-    return "Hello World!"
+    url = "http://"+getBotIp(request.data.decode('utf-8'))+":5001/"
+    response = requests.get(url) 
+    return response.text
 
+@app.route("/<handler>", methods=['POST'])
+def botHandler(handler):
+    return response.text
+
+@app.route("/prev", methods=['POST'])
+def prev():
+    domain = request.json['domain']
+    url = "http://"+getBotIp(domain)+":5001/"+request.json['key']
+    print(url)
+    
+    print(request.data.decode('utf-8'))
+    response = requests.post(url=url, json=request.json) 
+    return response.text
+
+def getBotIp(domain):
+    for bot in botDicts:
+        if domain == bot['domain']:
+            return bot['botIp']
+
+@app.route("/keys/<key>", methods=['GET'])
+def checkKey(key):
+    if checkApiKeyInMemory(key):
+        response_body = 'ok'
+        status = '200'
+    else:
+        response_body = 'There is no key.'
+        status = '303'
+
+    return response_body, status
+    
 def connect():
     username = 'hwanhee'
     password = 'hwanhee'
@@ -34,14 +68,27 @@ def insertOne(collection, model):
         collection.insert_one(model)
         print(model['apiKey'])
 
+
 def printAll(collection):
     for result in collection.find():
         print(result)
 
-# logonBots = connectLogonBots()
-# insertOne(logonBots, defaultModel)
+def checkApiKeyInMemory(apiKey):
+    for bot in botDicts:
+        if apiKey == bot['apiKey']:
+            return True
+    
+    return False
+        
+logonBots = connectLogonBots()
+documents = logonBots.find()
+botDicts = []
 
-app.run(host='0.0.0.0', port=8089)
+for document in documents:
+    botDicts.append(document)
+
+#printAll(logonBots)
+app.run(host='0.0.0.0', port=5000)
 
 #printAll(logonBots)
 #print(exists(logonBots, 'e26e3e94-2c94-4402-aa44-e6bd24619b55'))
